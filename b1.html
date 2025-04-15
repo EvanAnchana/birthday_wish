@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Click the Right Box!</title>
+  <!-- Viewport tag for mobile responsiveness -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background-color: #001f3f; /* Dark Blue */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: white;
+      margin-bottom: 30px;
+      text-align: center;
+      padding: 0 10px;
+    }
+
+    .box-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: #0074D9; /* Blue */
+      border-radius: 15px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .box:hover {
+      transform: scale(1.1);
+      background-color: #339CFF;
+    }
+
+    #wrapper {
+      display: none;
+      position: relative;
+    }
+
+    #message {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 30px 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      z-index: 2;
+      max-width: 90vw;
+    }
+
+    #message h1 {
+      color: #222;
+      font-size: 24px;
+    }
+
+    .sticker {
+      width: 120px; /* Scaled down for mobile */
+      position: absolute;
+      z-index: 1;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    @media screen and (max-width: 600px) {
+      .box {
+        width: 80px;
+        height: 80px;
+      }
+
+      .sticker {
+        width: 90px;
+      }
+
+      #message h1 {
+        font-size: 20px;
+      }
+
+      #message p {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Click the right box!</h1>
+  <div class="box-container" id="boxContainer"></div>
+
+  <div id="wrapper">
+    <div id="message">
+      <h1>Happyyy Birthdayyy Rishikaaa 💙🎂</h1>
+      <p>Your heart is as big as your dreams, and I can't wait to see all the amazing things this year has in store for you! 🍰✨</p>
+      <audio id="bgMusic" src="birthday_music.mp3"></audio>
+    </div>
+
+    <!-- Stickers -->
+    <img src="white-cute-cat-hearts.webp" class="sticker" style="top: -50px; left: -80px;">
+    <img src="bubu-dudu-sseeyall.webp" class="sticker" style="top: -50px; right: -40px;">
+    <img src="love-mochi.webp" class="sticker" style="bottom: -30px; left: -80px;">
+    <img src="cute-mochi-mochi.webp" class="sticker" style="bottom: -40px; right: -40px;">
+  </div>
+
+  <script>
+    const boxContainer = document.getElementById("boxContainer");
+    const correctIndex = Math.floor(Math.random() * 5);
+
+    for (let i = 0; i < 5; i++) {
+      const box = document.createElement("div");
+      box.classList.add("box");
+      box.onclick = i === correctIndex ? showMessage : wrongBox;
+      boxContainer.appendChild(box);
+    }
+
+    function showMessage() {
+      document.querySelector('.box-container').style.display = 'none';
+      document.querySelector('h1').style.display = 'none';
+      document.getElementById('wrapper').style.display = 'inline-block';
+      document.getElementById('bgMusic').play();
+    }
+
+    function wrongBox() {
+      alert("Oops! Try another box!");
+    }
+  </script>
+
+</body>
+</html>
